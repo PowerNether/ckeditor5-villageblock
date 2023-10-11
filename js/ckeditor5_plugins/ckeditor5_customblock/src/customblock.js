@@ -2,17 +2,17 @@ import { Plugin } from 'ckeditor5/src/core';
 import { ButtonView } from 'ckeditor5/src/ui';
 import { toWidget, viewToModelPositionOutsideModelElement } from "ckeditor5/src/widget";
 
-const VillageBlockIcon = '<?xml version="1.0" encoding="UTF-8"?><svg fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m3 19v-13.3c-6e-5 -0.20528 0.06305-0.4056 0.18077-0.57377 0.11772-0.16816 0.28433-0.29603 0.47723-0.36623l9.671-3.516c0.0755-0.0275 0.1566-0.03637 0.2363-0.02587s0.1557 0.04007 0.2216 0.08619c0.0658 0.04612 0.1196 0.10744 0.1567 0.17876 0.0371 0.07131 0.0564 0.15053 0.0564 0.23092v4.953l6.316 2.105c0.1992 0.06635 0.3725 0.19371 0.4952 0.36405 0.1228 0.17033 0.1889 0.37498 0.1888 0.58495v9.279h2v2h-22v-2h2zm2 0h7v-15.144l-7 2.544v12.6zm14 0v-8.558l-5-1.667v10.225h5z" fill="#000"/></svg>';
-class VillageBlockModal {
+const CustomBlockIcon = '<?xml version="1.0" encoding="UTF-8"?><svg fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m3 19v-13.3c-6e-5 -0.20528 0.06305-0.4056 0.18077-0.57377 0.11772-0.16816 0.28433-0.29603 0.47723-0.36623l9.671-3.516c0.0755-0.0275 0.1566-0.03637 0.2363-0.02587s0.1557 0.04007 0.2216 0.08619c0.0658 0.04612 0.1196 0.10744 0.1567 0.17876 0.0371 0.07131 0.0564 0.15053 0.0564 0.23092v4.953l6.316 2.105c0.1992 0.06635 0.3725 0.19371 0.4952 0.36405 0.1228 0.17033 0.1889 0.37498 0.1888 0.58495v9.279h2v2h-22v-2h2zm2 0h7v-15.144l-7 2.544v12.6zm14 0v-8.558l-5-1.667v10.225h5z" fill="#000"/></svg>';
+class CustomBlockModal {
     id = '';
     disableScroll = false;
-    openClass = 'villageblockmodal__slide__opened';
+    openClass = 'customblockmodal__slide__opened';
     trigger = '';
 
     constructor ({ id, disableScroll, openClass }) {
         this.id = id || '';
         this.disableScroll = disableScroll || false;
-        this.openClass = openClass || 'villageblockmodal__slide__opened';
+        this.openClass = openClass || 'customblockmodal__slide__opened';
 
         this.modal = document.getElementById(this.id);
 
@@ -32,7 +32,7 @@ class VillageBlockModal {
             let body = document.body;
 
             if (window.innerWidth > 768) {
-                this.modal.querySelector('.villageblockmodal__overlay').style.paddingRight = '15px';
+                this.modal.querySelector('.customblockmodal__overlay').style.paddingRight = '15px';
                 body.style.transition = 'unset';
             }
             body.style.overflow = 'hidden';
@@ -45,7 +45,7 @@ class VillageBlockModal {
             let body = document.body;
 
             if (window.innerWidth > 768) {
-                this.modal.querySelector('.villageblockmodal__overlay').style.paddingRight = null;
+                this.modal.querySelector('.customblockmodal__overlay').style.paddingRight = null;
             }
 
             body.style.overflow = null;
@@ -65,7 +65,7 @@ class VillageBlockModal {
     }
 
     showHandler () {
-        if (event.target.closest(`[data-villageblockmodal-trigger="${ this.id }"]`)) {
+        if (event.target.closest(`[data-customblockmodal-trigger="${ this.id }"]`)) {
             this.trigger = event.target;
             if (event.target.classList.contains('actions-item')) {
                 let object__id = event.target.closest('.favoriteControl').getAttribute('data-object_id');
@@ -82,8 +82,8 @@ class VillageBlockModal {
     }
 
     hideHandler () {
-        if (event.target.getAttribute('data-villageblockmodal-close') !== null && event.which === 1) {
-            if (event.target.closest('.villageblockmodal__slide').getAttribute('id') !== this.id) return;
+        if (event.target.getAttribute('data-customblockmodal-close') !== null && event.which === 1) {
+            if (event.target.closest('.customblockmodal__slide').getAttribute('id') !== this.id) return;
 
             this.modal.classList.remove(this.openClass);
             setTimeout(() => {
@@ -115,12 +115,12 @@ class VillageBlockModal {
 }
 
 
-export default class VillageBlock extends Plugin {
+export default class CustomBlock extends Plugin {
     init() {
         this._defineSchema();
         this._defineConverters();
 
-        this.editor.editing.mapper.on( 'viewToModelPosition', viewToModelPositionOutsideModelElement( this.editor.model, viewElement => viewElement.hasClass( 'villageBlock' ) ) );
+        this.editor.editing.mapper.on( 'viewToModelPosition', viewToModelPositionOutsideModelElement( this.editor.model, viewElement => viewElement.hasClass( 'customBlock' ) ) );
 
         this._defineToolbarButton();
         this._createModal();
@@ -136,7 +136,7 @@ export default class VillageBlock extends Plugin {
         const conversion = this.editor.conversion;
 
         conversion.for( 'upcast' ).elementToElement( {
-            view: { name: 'div', classes: [ 'villageBlock' ] },
+            view: { name: 'div', classes: [ 'customBlock' ] },
             model: ( viewElement, { writer: modelWriter } ) => { return modelWriter.createElement( 'placeholder', { name: viewElement.getChild( 0 ).data.slice( 2, -2 ) } ) }
         } );
         conversion.for( 'editingDowncast' ).elementToElement( {
@@ -150,7 +150,7 @@ export default class VillageBlock extends Plugin {
 
         function createPlaceholderView( modelItem, viewWriter ) {
             const name = modelItem.getAttribute( 'name' );
-            const placeholderView = viewWriter.createContainerElement( 'div', { class: 'villageBlock' } );
+            const placeholderView = viewWriter.createContainerElement( 'div', { class: 'customBlock' } );
             const innerText = viewWriter.createText( '{{' + name + '}}' );
 
             viewWriter.insert( viewWriter.createPositionAt( placeholderView, 0 ), innerText );
@@ -162,11 +162,11 @@ export default class VillageBlock extends Plugin {
     _defineToolbarButton () {
         const componentFactory = this.editor.ui.componentFactory;
 
-        componentFactory.add( 'villageBlock', () => {
+        componentFactory.add( 'customBlock', () => {
             const button = new ButtonView();
 
-            button.set( { label: 'Добавить блок ЖК/КП', icon: VillageBlockIcon, tooltip: true } );
-            button.on( 'execute', () => { this.villageBlockModal.show() } );
+            button.set( { label: 'Добавить блок ЖК/КП', icon: CustomBlockIcon, tooltip: true } );
+            button.on( 'execute', () => { this.customBlockModal.show() } );
 
             return button;
         } );
@@ -174,28 +174,28 @@ export default class VillageBlock extends Plugin {
 
     _createModal () {
         let modal__element = document.createElement('div');
-        modal__element.classList.add('villageblockmodal__slide');
-        modal__element.id = 'villageBlock__modal';
+        modal__element.classList.add('customblockmodal__slide');
+        modal__element.id = 'customBlock__modal';
 
-        modal__element.innerHTML = `<div class="villageblockmodal__overlay" data-villageblockmodal-close><div class="villageblockmodal__container"><div class="villageblockmodal__header"><p class="villageblockmodal__title">Добавить блок ЖК/КП</p><span class="villageblockmodal__close" data-villageblockmodal-close></span></div><div class="villageblockmodal__content"><input hidden="hidden" name="villageblocknid" type="text"><div class="villageblockmodal__field"><input placeholder="Название ЖК или КП" name="villageblockname" type="text"><label for="villageblockname">Название ЖК или КП</label></div></div><div class="villageblockmodal__footer"><button disabled class="villageblockmodal__button">Добавить блок</button></div></div></div>`;
+        modal__element.innerHTML = `<div class="customblockmodal__overlay" data-customblockmodal-close><div class="customblockmodal__container"><div class="customblockmodal__header"><p class="customblockmodal__title">Добавить блок ЖК/КП</p><span class="customblockmodal__close" data-customblockmodal-close></span></div><div class="customblockmodal__content"><input hidden="hidden" name="customblocknid" type="text"><div class="customblockmodal__field"><input placeholder="Название ЖК или КП" name="customblockname" type="text"><label for="customblockname">Название ЖК или КП</label></div></div><div class="customblockmodal__footer"><button disabled class="customblockmodal__button">Добавить блок</button></div></div></div>`;
 
         document.body.append(modal__element);
 
-        this.villageBlockModal = new VillageBlockModal({
-            id: 'villageBlock__modal',
+        this.customBlockModal = new CustomBlockModal({
+            id: 'customBlock__modal',
             disableScroll: true,
         })
 
-        let field_name = modal__element.querySelector('input[name="villageblockname"]');
-        let field_nid = modal__element.querySelector('input[name="villageblocknid"]');
-        let button = modal__element.querySelector('.villageblockmodal__button');
+        let field_name = modal__element.querySelector('input[name="customblockname"]');
+        let field_nid = modal__element.querySelector('input[name="customblocknid"]');
+        let button = modal__element.querySelector('.customblockmodal__button');
 
         async function search ( value ) {
           if (!value || value.length < 2) return {};
 
           let params = new URLSearchParams();
           params.set('data', JSON.stringify(value));
-          params.set('type', JSON.stringify('ckeditor5_villageblock'));
+          params.set('type', JSON.stringify('ckeditor5_customblock'));
 
           let response = await fetch('/system/search', { method: 'POST', headers: { 'X-Requested-With': 'XMLHttpRequest' }, body: params });
 
@@ -213,11 +213,11 @@ export default class VillageBlock extends Plugin {
             if (Object.keys({}).length === 0) return;
 
             let parent = field_name.parentNode;
-            let search__result = parent.querySelector('.villageblockmodal__field__result');
+            let search__result = parent.querySelector('.customblockmodal__field__result');
 
             if (!search__result) {
               search__result = document.createElement('div');
-              search__result.classList.add('villageblockmodal__field__result');
+              search__result.classList.add('customblockmodal__field__result');
 
               parent.append(search__result);
             }
@@ -244,7 +244,7 @@ export default class VillageBlock extends Plugin {
         button.addEventListener('click', () => {
             this._insertComplexModal(field_nid.value);
 
-            this.villageBlockModal.hide();
+            this.customBlockModal.hide();
 
             field_name.value = '';
             field_nid.value = '';
