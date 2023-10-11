@@ -165,7 +165,7 @@ export default class VillageBlock extends Plugin {
         componentFactory.add( 'villageBlock', () => {
             const button = new ButtonView();
 
-            button.set( { label: 'Добавить карточку КП', icon: VillageBlockIcon, tooltip: true } );
+            button.set( { label: 'Добавить блок ЖК/КП', icon: VillageBlockIcon, tooltip: true } );
             button.on( 'execute', () => { this.villageBlockModal.show() } );
 
             return button;
@@ -177,7 +177,7 @@ export default class VillageBlock extends Plugin {
         modal__element.classList.add('villageblockmodal__slide');
         modal__element.id = 'villageBlock__modal';
 
-        modal__element.innerHTML = `<div class="villageblockmodal__overlay" data-villageblockmodal-close><div class="villageblockmodal__container"><div class="villageblockmodal__header"><p class="villageblockmodal__title">Добавить карточку ЖК или КП</p><span class="villageblockmodal__close" data-villageblockmodal-close></span></div><div class="villageblockmodal__content"><input hidden="hidden" name="villageblocknid" type="text"><div class="villageblockmodal__field"><input placeholder="Название ЖК или КП" name="villageblockname" type="text"><label for="villageblockname">Название ЖК или КП</label></div></div><div class="villageblockmodal__footer"><button disabled class="villageblockmodal__button">Добавить блок</button></div></div></div>`;
+        modal__element.innerHTML = `<div class="villageblockmodal__overlay" data-villageblockmodal-close><div class="villageblockmodal__container"><div class="villageblockmodal__header"><p class="villageblockmodal__title">Добавить блок ЖК/КП</p><span class="villageblockmodal__close" data-villageblockmodal-close></span></div><div class="villageblockmodal__content"><input hidden="hidden" name="villageblocknid" type="text"><div class="villageblockmodal__field"><input placeholder="Название ЖК или КП" name="villageblockname" type="text"><label for="villageblockname">Название ЖК или КП</label></div></div><div class="villageblockmodal__footer"><button disabled class="villageblockmodal__button">Добавить блок</button></div></div></div>`;
 
         document.body.append(modal__element);
 
