@@ -1,0 +1,14 @@
+ckeditor5_villageblock_villageblock:
+  ckeditor5:
+    plugins:
+      - ckeditor5_villageblock.VillageBlock
+  drupal:
+    label: Village Block
+    library: ckeditor5_villageblock/villageblock
+    admin_library: ckeditor5_villageblock/admin.villageblock
+    toolbar_items:
+      villageBlock:
+        label: Карточка КП
+    elements:
+      - <div>
+      - <div class="villageBlock">

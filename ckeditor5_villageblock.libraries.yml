@@ -1,0 +1,13 @@
+villageblock:
+  css:
+    theme:
+      css/villageblock.css: { }
+  js:
+    js/build/ckeditor5_villageblock.js: { preprocess: false, minified: true }
+  dependencies:
+    - core/ckeditor5
+
+admin.villageblock:
+  css:
+    theme:
+      css/villageblock.admin.css: { }
