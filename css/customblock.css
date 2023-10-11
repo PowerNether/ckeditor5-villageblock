@@ -1,11 +1,11 @@
-.villageBlock {
+.customBlock {
 	display: flex;
 
 	border-radius: 4px;
 	border: 1px solid #EBEBEB;
 }
 
-.villageblockmodal__slide {
+.customblockmodal__slide {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -19,23 +19,23 @@
 	user-select: none;
 	pointer-events: none;
 }
-.villageblockmodal__slide * {
+.customblockmodal__slide * {
 	box-sizing: border-box;
 }
-.villageblockmodal__slide__opened {
+.customblockmodal__slide__opened {
 	opacity: 1;
 	-webkit-user-select: auto;
 	-moz-user-select: auto;
 	user-select: auto;
 	pointer-events: all;
 }
-.villageblockmodal__slide__opened .villageblockmodal__container {
+.customblockmodal__slide__opened .customblockmodal__container {
 	transform: translateY(0%);
 }
-.villageblockmodal__slide.init {
+.customblockmodal__slide.init {
 	transition: opacity .35s ease;
 }
-.villageblockmodal__overlay {
+.customblockmodal__overlay {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -46,7 +46,7 @@
 	align-items: center;
 	background: rgba(13, 10, 26, 0.6470588235);
 }
-.villageblockmodal__container {
+.customblockmodal__container {
 	width: 100%;
 	max-width: 400px;
 	max-height: 100vh;
@@ -55,7 +55,7 @@
 	transform: translateY(-10%);
 	transition: transform .35s ease;
 }
-.villageblockmodal__header {
+.customblockmodal__header {
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
@@ -64,7 +64,7 @@
 
 	margin-bottom: 24px;
 }
-.villageblockmodal__title {
+.customblockmodal__title {
 	font-weight: 600;
 	font-size: 22px;
 	line-height: 28px;
@@ -73,7 +73,7 @@
 	padding-right: 32px;
 	margin: 0;
 }
-.villageblockmodal__close {
+.customblockmodal__close {
 	position: absolute;
 	top: 20px;
 	right: 16px;
@@ -88,16 +88,16 @@
 	cursor: pointer;
 	transition: background .35s;
 }
-.villageblockmodal__close:hover {
+.customblockmodal__close:hover {
 	background-color: transparent;
 }
-.villageblockmodal__close:hover:before {
+.customblockmodal__close:hover:before {
 	background: #F1F0FA;
 }
-.villageblockmodal__close:hover:after {
+.customblockmodal__close:hover:after {
 	background: #5947B3;
 }
-.villageblockmodal__close:before {
+.customblockmodal__close:before {
 	content: "";
 
 	position: absolute;
@@ -116,7 +116,7 @@
 
 	transition: background-color 0.35s;
 }
-.villageblockmodal__close:after {
+.customblockmodal__close:after {
 	content: "";
 
 	position: absolute;
@@ -137,38 +137,39 @@
 
 	transition: background-color 0.35s;
 }
-.villageblockmodal__content {
+.customblockmodal__content {
 	padding: 0 20px 24px;
 }
-.villageblockmodal__field {
+.customblockmodal__content .customblockmodal__field {
 	position: relative;
 }
-.villageblockmodal__field input {
-	font-size: 15px;
+.customblockmodal__content .customblockmodal__field input {
+	font-size: 15px !important;
 	font-weight: 400;
 	line-height: 20px;
 	color: #333333;
 
 	width: 100%;
+  height: unset !important;
 
-	padding: 18px 12px 4px;
+	padding: 18px 12px 4px !important;
 
-	border-radius: 8px;
-	border: 1px solid #D0D5DD;
+	border-radius: 8px !important;
+	border: 1px solid #D0D5DD !important;
 	background-color: transparent;
-	box-shadow: 0 0 0 4px transparent, 0 1px 2px 0 transparent;
+	box-shadow: 0 0 0 4px transparent, 0 1px 2px 0 transparent !important;
 
 	transition: border-color .35s, box-shadow .35s;
 }
-.villageblockmodal__field input:focus {
-	outline: none;
-	border-color: #D6BBFB;
-	box-shadow: 0 0 0 4px #F4EBFF, 0 1px 2px 0 rgba(16, 24, 40, 0.05);
+.customblockmodal__content .customblockmodal__field input:focus {
+	outline: none !important;
+	border-color: #D6BBFB !important;
+	box-shadow: 0 0 0 4px #F4EBFF, 0 1px 2px 0 rgba(16, 24, 40, 0.05) !important;
 }
-.villageblockmodal__field input::placeholder {
-	font-size: 0;
+.customblockmodal__content .customblockmodal__field input::placeholder {
+	font-size: 0 !important;
 }
-.villageblockmodal__field label {
+.customblockmodal__content .customblockmodal__field label {
 	font-size: 15px;
 	font-weight: 400;
 	line-height: 24px;
@@ -185,13 +186,13 @@
 
 	transition: font-size .35s, top .35s, transform .35s;
 }
-.villageblockmodal__field input:not(:placeholder-shown) ~ label,
-.villageblockmodal__field input:focus ~ label {
+.customblockmodal__content .customblockmodal__field input:not(:placeholder-shown) ~ label,
+.customblockmodal__content .customblockmodal__field input:focus ~ label {
 	font-size: 11px;
 	top: 0;
 	transform: translateY(0);
 }
-.villageblockmodal__field__result {
+.customblockmodal__content .customblockmodal__field__result {
   position: absolute;
   top: 100%;
   left: 0;
@@ -210,7 +211,7 @@
 
   box-shadow: 0 4px 6px -2px rgba(16, 24, 40, 0.03), 0 12px 16px -4px rgba(16, 24, 40, 0.08);
 }
-.villageblockmodal__field__result .box-name {
+.customblockmodal__content .customblockmodal__field__result .box-name {
   font-weight: 600;
   font-size: 11px;
   line-height: 16px;
@@ -220,7 +221,7 @@
 
   padding: 8px 8px 8px;
 }
-.villageblockmodal__field__result .line {
+.customblockmodal__content .customblockmodal__field__result > .line {
   font-size: 14px;
   line-height: 18px;
   color: #333;
@@ -236,10 +237,10 @@
 
   transition: background-color .3s linear, color .3s linear;
 }
-.villageblockmodal__field__result .line:hover {
+.customblockmodal__content .customblockmodal__field__result > .line:hover {
   background-color: #F7F6FB;
 }
-.villageblockmodal__field__result .line .photo {
+.customblockmodal__content .customblockmodal__field__result > .line .photo {
   overflow: hidden;
   flex-shrink: 0;
   width: 58px;
@@ -247,7 +248,7 @@
   margin-right: 15px;
   border-radius: 4px;
 }
-.villageblockmodal__field__result .line .photo img {
+.customblockmodal__content .customblockmodal__field__result > .line .photo img {
   display: block;
 
   width: 100%;
@@ -257,40 +258,34 @@
 
   border-radius: 4px;
 }
-.villageblockmodal__field__result .line .line-content {
+.customblockmodal__content .customblockmodal__field__result > .line .line-content {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
 }
-.villageblockmodal__field__result .line .line-content a {
+.customblockmodal__content .customblockmodal__field__result > .line .line-content a {
   text-decoration: none;
   color: inherit;
 
   pointer-events: none;
 }
-.villageblockmodal__field__result .line .line-content .name {
+.customblockmodal__content .customblockmodal__field__result > .line .line-content .name {
   width: calc(100% - 75px);
   margin-left: 5px;
 }
-.villageblockmodal__field__result .line .line-content .info {
+.customblockmodal__content .customblockmodal__field__result > .line .line-content .info {
   font-size: 12px;
   color: #737373;
   overflow: hidden;
   width: 100%;
 }
-.villageblockmodal__field__result .box-name:not([data-id="10"]) {
-  display: none;
-}
-.villageblockmodal__field__result .line:not([data-section="10"]) {
-  display: none;
-}
-.villageblockmodal__footer {
+.customblockmodal__footer {
 	display: flex;
 	align-items: center;
 	padding: 12px 24px;
 	border-top: 1px solid #EBEBEB;
 }
-.villageblockmodal__button {
+.customblockmodal__button {
 	font-weight: 600;
 	font-size: 15px;
 	line-height: 46px;
@@ -309,11 +304,11 @@
 
 	transition: color .35s, background-color .35s;
 }
-.villageblockmodal__button:not(:disabled):hover {
+.customblockmodal__button:not(:disabled):hover {
 	color: #5947B3;
 	background-color: #EBE9F6;
 }
-.villageblockmodal__button:disabled {
+.customblockmodal__button:disabled {
 	color: #B3B3B3;
 	background-color: #F5F5F7;
 	cursor: not-allowed;

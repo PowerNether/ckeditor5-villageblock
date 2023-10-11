@@ -1,6 +1,6 @@
-name: CKEditor5 Village Block
+name: CKEditor5 Custom Block
 type: module
-description: "Плагин для CKEditor5 Village Block"
+description: "Плагин для CKEditor5 Custom Block"
 package: CKEditor
 core_version_requirement: ">=9.3"
 dependencies:

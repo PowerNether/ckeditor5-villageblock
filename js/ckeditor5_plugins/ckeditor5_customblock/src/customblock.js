@@ -210,7 +210,7 @@ export default class CustomBlock extends Plugin {
 
         field_name.addEventListener('input', async () => {
             let response = await search( field_name.value );
-            if (Object.keys({}).length === 0) return;
+            if (Object.keys(response).length === 0) return;
 
             let parent = field_name.parentNode;
             let search__result = parent.querySelector('.customblockmodal__field__result');
@@ -241,6 +241,13 @@ export default class CustomBlock extends Plugin {
         field_nid.addEventListener('change', () => {
             (field_nid.value !== '') ? button.disabled = false : button.disabled = true;
         });
+        let modal__container = document.querySelector('.customblockmodal__container');
+        modal__container.addEventListener('click', () => {
+          if (!event.target.closest('.customblockmodal__field')) {
+            let search__result = modal__container.querySelector('.customblockmodal__field__result');
+            if (search__result) search__result.remove();
+          }
+        })
         button.addEventListener('click', () => {
             this._insertComplexModal(field_nid.value);
 
@@ -259,7 +266,7 @@ export default class CustomBlock extends Plugin {
 
         model.change( writer => {
             const selection = this.editor.model.document.selection;
-            const placeholder = writer.createElement( 'placeholder', { ...Object.fromEntries( selection.getAttributes() ), name: ' complexInfo(' + id + ') ' } );
+            const placeholder = writer.createElement( 'placeholder', { ...Object.fromEntries( selection.getAttributes() ), name: ' parentObjectInfo(' + id + ') ' } );
             model.insertObject( placeholder, null, null, { setSelection: 'on' } );
         } );
     }

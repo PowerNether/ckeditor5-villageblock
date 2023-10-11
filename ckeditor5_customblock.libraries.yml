@@ -1,13 +1,13 @@
-villageblock:
+customblock:
   css:
     theme:
-      css/villageblock.css: { }
+      css/customblock.css: { }
   js:
-    js/build/ckeditor5_villageblock.js: { preprocess: false, minified: true }
+    js/build/ckeditor5_customblock.js: { preprocess: false, minified: true }
   dependencies:
     - core/ckeditor5
 
-admin.villageblock:
+admin.customblock:
   css:
     theme:
-      css/villageblock.admin.css: { }
+      css/customblock.admin.css: { }
